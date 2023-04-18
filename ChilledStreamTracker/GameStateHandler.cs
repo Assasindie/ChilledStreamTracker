@@ -55,7 +55,7 @@ public class GameStateHandler
         {
             _killsInRound = gs.Player.State.RoundKills;
             Console.WriteLine($"{DateTime.Now} chilled got a kill rare as hell total this round {_killsInRound}");
-            await _speech.GenerateAndSpeak("Chilled has somehow gotten a kill");
+            await _speech.GenerateAndSpeak("Chilled has somehow gotten a kill", detailed: false);
         }
 
         _kdInfo =
@@ -85,7 +85,6 @@ public class GameStateHandler
         if (gs.Round.Phase is RoundPhase.FreezeTime or RoundPhase.Undefined && !_enteredFreezeTime)
         {
             //reset all the random stuff to stop it spamming out
-            _killsInRound = 0;
             _enteredFreezeTime = true;
             _saidChilledDiedFirst = false;
             _clutchEnemies = 0;
@@ -95,6 +94,8 @@ public class GameStateHandler
             _timeAlive.Stop();
             
             await _speech.GenerateAndSpeak($"Chilled had a total of {_killsInRound} kills that round");
+            _killsInRound = 0;
+
         }
         else if (gs.Round.Phase == RoundPhase.Live && _enteredFreezeTime)
         {
