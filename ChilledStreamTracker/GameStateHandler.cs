@@ -26,7 +26,7 @@ public class GameStateHandler
         gameStateListener.Start();
         if (!gameStateListener.Running)
         {
-            throw new Exception("check not running 2 versions or something cause it didnt start up");
+            throw new Exception("check not running 2 versions or something cause it didn't start up");
         } 
         _speech = new SpeechGenerator();
     }
